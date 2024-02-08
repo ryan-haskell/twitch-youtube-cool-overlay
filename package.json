@@ -1,0 +1,29 @@
+{
+  "name": "youtube-chat-view",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm i && npm run dev",
+    "build": "npm run build:frontend",
+    "build:frontend": "(cd frontend && elm make src/Main.elm --output=static/dist/elm.compiled.js)",
+    "dev": "concurrently -n frontend,backend -c cyan,magenta npm:dev:frontend npm:dev:backend",
+    "dev:frontend": "concurrently -n watch,serve -c yellow,green npm:watch:frontend npm:serve:frontend",
+    "dev:backend": "nodemon -w backend backend/main.js",
+    "watch:frontend": "chokidar frontend/src -c \"npm run build:frontend\"",
+    "serve:frontend": "static-server -p 3000 frontend/static"
+  },
+  "author": "Ryan Haskell-Glatz",
+  "license": "ISC",
+  "dependencies": {
+    "tmi.js": "1.8.5",
+    "ws": "8.16.0",
+    "youtube-chat": "2.2.0"
+  },
+  "devDependencies": {
+    "concurrently": "8.2.2",
+    "elm": "0.19.1-6",
+    "nodemon": "3.0.3",
+    "static-server": "2.2.1"
+  }
+}
